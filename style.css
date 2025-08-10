@@ -91,7 +91,7 @@ body {
 .hero {
     position: relative;
     height: 100vh;
-    background: url('images/car.jpg') no-repeat center center/cover;
+    background: url('car.jpg') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -995,3 +995,4 @@ nav ul li a:hover::after {
         text-align: center;
     }
 }
+
