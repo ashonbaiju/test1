@@ -1,31 +1,30 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Unified animation observer
-    const animateElements = (selector, options = {}) => {
-        const elements = document.querySelectorAll(selector);
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: options.threshold || 0.15,
-            rootMargin: options.rootMargin || '0px 0px -50px 0px'
+    // Animation observer for individual elements
+    const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.animate-item');
+        const windowHeight = window.innerHeight;
+        const triggerOffset = windowHeight * 0.15;
+        
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            
+            if (elementPosition < windowHeight - triggerOffset) {
+                element.classList.add('visible');
+            }
         });
-
-        elements.forEach(el => observer.observe(el));
     };
-
-    // Set up all animations
-    animateElements('.fade-slide');
-    animateElements('.image-box, .text-box');
-    animateElements('.contact-left, .contact-center, .contact-right');
-
+    
+    // Initial check on load
+    animateOnScroll();
+    
+    // Check on scroll
+    window.addEventListener('scroll', animateOnScroll);
+    
     // Scroll-based navbar behavior
     const navbar = document.querySelector('.navbar');
     let lastScrollY = window.scrollY;
     let ticking = false;
-
+    
     const updateNavbar = () => {
         const currentScrollY = window.scrollY;
         
@@ -40,14 +39,14 @@ document.addEventListener('DOMContentLoaded', function() {
         lastScrollY = currentScrollY;
         ticking = false;
     };
-
+    
     window.addEventListener('scroll', () => {
         if (!ticking) {
             window.requestAnimationFrame(updateNavbar);
             ticking = true;
         }
     });
-
+    
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -63,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-
+    
     // Parallax effect
     const hero = document.querySelector('.hero');
     if (hero) {
@@ -71,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
             hero.style.backgroundPositionY = `${window.scrollY * 0.5}px`;
         });
     }
-
+    
     // Contact form handling
     const subscribeForm = document.getElementById('subscribeForm');
     if (subscribeForm) {
