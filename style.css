@@ -15,7 +15,27 @@ body {
     overflow-x: hidden;
 }
 
-/* ================= NAVBAR ================= */
+/* Animation Styles */
+.animate-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1), 
+                opacity 0.6s ease;
+    will-change: transform, opacity;
+}
+
+.animate-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Delay animations for staggered effect */
+.animate-item:nth-child(1) { transition-delay: 0.1s; }
+.animate-item:nth-child(2) { transition-delay: 0.2s; }
+.animate-item:nth-child(3) { transition-delay: 0.3s; }
+.animate-item:nth-child(4) { transition-delay: 0.4s; }
+
+/* Navbar */
 .navbar {
     width: 100%;
     padding: 20px 50px;
@@ -65,11 +85,11 @@ body {
     opacity: 0;
 }
 
-/* ================= HERO ================= */
+/* Hero Section */
 .hero {
     position: relative;
     height: 100vh;
-    background: url('car.jpg') no-repeat center center/cover;
+    background: url('images/car.jpg') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -116,7 +136,25 @@ body {
     line-height: 1.6;
 }
 
-/* ================= VISION ================= */
+.cta-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 30px;
+    background: #005f99;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #003d66;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Vision Section */
 .vision {
     background: #000;
     color: #fff;
@@ -174,7 +212,7 @@ body {
     box-shadow: 0 15px 30px rgba(0,0,0,0.4);
 }
 
-/* ================= FLIP LAYOUT ================= */
+/* Flip Layout Sections */
 .flip-layout {
     display: flex;
     align-items: center;
@@ -201,14 +239,6 @@ body {
     flex: 1;
     position: relative;
     z-index: 2;
-    transform: translateY(30px);
-    opacity: 0;
-    transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.8s ease;
-}
-
-.flip-layout .image-box.visible {
-    transform: translateY(0);
-    opacity: 1;
 }
 
 .flip-layout .image-box img {
@@ -222,14 +252,6 @@ body {
     flex: 1;
     position: relative;
     z-index: 2;
-    transform: translateY(30px);
-    opacity: 0;
-    transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s, opacity 0.8s ease 0.1s;
-}
-
-.flip-layout .text-box.visible {
-    transform: translateY(0);
-    opacity: 1;
 }
 
 .flip-layout h2 {
@@ -268,7 +290,7 @@ body {
     margin-left: 14px;
 }
 
-/* ================= CONTACT SECTION ================= */
+/* Contact Section */
 .contact-section {
     background: #f7f7f7;
     color: #000;
@@ -290,16 +312,6 @@ body {
 .contact-right {
     flex: 1;
     min-width: 250px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.contact-left.visible,
-.contact-center.visible,
-.contact-right.visible {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .contact-left .logo {
@@ -451,20 +463,7 @@ body {
     filter: grayscale(0%) contrast(100%);
 }
 
-/* ================= ANIMATIONS ================= */
-.fade-slide {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.8s ease;
-    will-change: transform, opacity;
-}
-
-.fade-slide.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ================= RESPONSIVE ================= */
+/* Responsive Design */
 @media (max-width: 900px) {
     .navbar {
         padding: 15px 20px;
@@ -532,4 +531,3 @@ body {
         margin-top: 10px;
     }
 }
-
